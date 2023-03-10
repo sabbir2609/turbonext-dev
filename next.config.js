@@ -5,7 +5,7 @@ const nextConfig = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['images.unsplash.com', 'tailwindui.com'],
+    domains: ['images.unsplash.com', 'tailwindui.com', '127.0.0.1'],
     remotePatterns: [
       {
         protocol: 'https',
