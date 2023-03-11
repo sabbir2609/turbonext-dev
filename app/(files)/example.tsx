@@ -70,3 +70,62 @@ export default function ProductsAll({ page }: Props) {
         </>
     );
 }
+
+
+
+// pagination example 
+
+import React from 'react';
+
+export default function Blog({ posts, page, pageCount }) {
+  return (
+    <div>
+      <h1>Blog</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+      <nav>
+        {page > 1 && (
+          <a href={`/blog/${page - 1}`}>Previous</a>
+        )}
+        {page < pageCount && (
+          <a href={`/blog/${page + 1}`}>Next</a>
+        )}
+      </nav>
+    </div>
+  );
+}
+
+export async function getStaticPaths() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const posts = await res.json();
+  const perPage = 5;
+  const pageCount = Math.ceil(posts.length / perPage);
+  const paths = [];
+
+  for (let i = 1; i <= pageCount; i++) {
+    paths.push({ params: { page: i.toString() } });
+  }
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const posts = await res.json();
+  const perPage = 5;
+  const page = parseInt(params.page, 10);
+  const start = (page - 1) * perPage;
+  const end = start + perPage;
+  const pageCount = Math.ceil(posts.length / perPage);
+
+  return {
+    props: {
+      posts: posts.slice(start, end),
+      page,
+      pageCount,
+    },
+  };
+}
