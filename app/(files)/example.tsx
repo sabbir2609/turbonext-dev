@@ -129,3 +129,47 @@ export async function getStaticProps({ params }) {
     },
   };
 }
+
+
+// for rest api 
+
+import React from 'react';
+
+export default function Blog({ posts, page, pageCount }) {
+  return (
+    <div>
+      <h1>Blog</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+      <nav>
+        {page > 1 && (
+          <a href={`/blog?page=${page - 1}`}>Previous</a>
+        )}
+        {page < pageCount && (
+          <a href={`/blog?page=${page + 1}`}>Next</a>
+        )}
+      </nav>
+    </div>
+  );
+}
+
+export async function getServerSideProps({ query }) {
+  const page = parseInt(query.page) || 1;
+  const perPage = 5;
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${perPage}`);
+  const posts = await res.json();
+  const resCount = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const totalCount = resCount.headers.get('X-Total-Count');
+  const pageCount = Math.ceil(totalCount / perPage);
+
+  return {
+    props: {
+      posts,
+      page,
+      pageCount,
+    },
+  };
+}
