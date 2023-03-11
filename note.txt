@@ -10,3 +10,6 @@ interface Data {
   collection: string;
   image: string;
 }
+
+
+item.images.length > 0 && item.images ? item.images.image : '/images/placeholder-image.webp'

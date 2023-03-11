@@ -13,22 +13,12 @@ const userNavigation = [
 ]
 const navigation = [
     { id: 1, name: 'Home', href: '/homepage', current: true },
-    { id: 2, name: 'Books', href: '/products', current: false },
-    { id: 3, name: 'Projects', href: '#', current: false },
+    { id: 2, name: 'Products', href: '/products', current: false },
+    { id: 3, name: 'Projects Demo', href: '/products-all', current: false },
     { id: 4, name: 'Calendar', href: '#', current: false },
     { id: 5, name: 'Reports', href: '#', current: false },
 
     // experimental
-    { id: 1, name: 'Home', href: '/homepage', current: true },
-    { id: 2, name: 'Books', href: '/products', current: false },
-    { id: 3, name: 'Projects', href: '#', current: false },
-    { id: 4, name: 'Calendar', href: '#', current: false },
-    { id: 5, name: 'Reports', href: '#', current: false },
-    { id: 1, name: 'Home', href: '/homepage', current: true },
-    { id: 2, name: 'Books', href: '/products', current: false },
-    { id: 3, name: 'Projects', href: '#', current: false },
-    { id: 4, name: 'Calendar', href: '#', current: false },
-    { id: 5, name: 'Reports', href: '#', current: false },
 ]
 
 export default function Sidebar() {

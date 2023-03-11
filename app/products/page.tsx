@@ -11,7 +11,7 @@ export default async function ProductsAll() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 p-4">
                 {results?.map((item: any) => (
                     <div key={item.id} className="card card-compact bg-base-100 h-80 shadow-xl">
-                        <figure><Image height={500} width={500} src={item.images.length > 0 && item.images ? item.images.image : '/images/placeholder-image.webp'} alt={item.title} /></figure>
+                        <figure><Image height={500} width={500} src={item?.images[0]?.image || '/images/placeholder-image.webp'} alt={item.title} /></figure>
                         <div className="card-body">
                             <h2 className="card-title truncate hover:text-clip">{item.title}</h2>
                             <p className="truncate hover:text-clip">{item.description}</p>

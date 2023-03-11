@@ -43,7 +43,7 @@ export default function RootLayout({
                                     </div>
                                 </div>
                             </div>
-                            <ul className="menu p-4 w-80 bg-base-100">
+                            <ul className="menu p-4 w-80 bg-base-200">
                                 {/* <!-- Sidebar content here --> */}
                                 <Sidebar />
 
