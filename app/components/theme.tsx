@@ -3,10 +3,10 @@
 import { useEffect } from "react";
 import { themeChange } from "theme-change";
 
-type ComponentProps = {
-    Component: React.ComponentType;
+interface ComponentProps {
+    Component: any;
     pageProps: any;
-};
+}
 
 export default function Theme({ Component, pageProps }: ComponentProps) {
     const themes = ["light", "dark", "cupcake", "bumblebee", "emerald", "corporate", "synthwave", "retro", "cyberpunk", "valentine", "halloween", "garden", "forest", "aqua", "lofi", "pastel", "fantasy", "wireframe", "black", "luxury", "dracula", "cmyk", "autumn", "business", "acid", "lemonade", "night", "coffee", "winter"];

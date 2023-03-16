@@ -1,20 +1,39 @@
-import { type } from "os";
-import React from "react";
-import { PassThrough } from "stream";
+"use client";
 
-const fetchPage = async (pageId: string) => {
-    const response = await fetch(`http://127.0.0.1:8000/store/products/?page=${pageId}`);
-    const { results } = await response.json();
-    return results;
-};
+import { useState, useEffect } from 'react';
 
-type PageProps = {
-    pageId: string;
-};
+interface Product {
+    id: number;
+    name: string;
+    // add any other properties here
+}
 
-export default async function Page({ pageId }: PageProps) {
+function ProductsPage() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [pageNumber, setPageNumber] = useState<number>(1);
+
+    useEffect(() => {
+        async function fetchData() {
+            const res = await fetch(`http://127.0.0.1:8000/store/products/?page=${pageNumber}`);
+            const data = await res.json();
+            console.log(data);
+            setProducts(data.results);
+        }
+
+        fetchData();
+    }, [pageNumber]);
+
     return (
-        <>
-        </>
+        <div>
+            <h1>Products</h1>
+            <ul>
+                {products.map((product) => (
+                    <li key={product.id}>{product.name}</li>
+                ))}
+            </ul>
+            <button onClick={() => setPageNumber(pageNumber + 1)}>Next Page</button>
+        </div>
     );
 }
+
+export default ProductsPage;
